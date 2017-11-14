@@ -9,6 +9,7 @@ html {
 }
 
 h1 {
+  margin: 0;
   padding: .77rem 0;
   background-color: #010c3f;
   text-align: center;
@@ -29,8 +30,7 @@ h2 {
 .App {
   height: 100%;
   padding: 0 17% 10% 17%;
-  background-color: #ECECEC;
-  /*background-image: url('./background_photo_desktop.jpg');*/
+  background-image: url('./background_photo_desktop.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
