@@ -8,7 +8,7 @@ class SearchResults extends React.Component {
     return (
       <div className="SearchResults">
         <h2>Choose your song !</h2>
-        <TrackList />
+        <TrackList tracks={this.props.searchResults} />
       </div>
     )
   }
