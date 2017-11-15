@@ -13,7 +13,8 @@ class App extends Component {
         name : 'Viens danser',
         artist : 'Gilbert M',
         album : 'Nevermind'
-      }] 
+      }],
+      playlistResults : [] 
     }
   }
 
@@ -25,7 +26,7 @@ class App extends Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} />
-            <Playlist />
+            <Playlist playlistResults={this.state.playlistResults} />
           </div>
         </div>
       </div>
