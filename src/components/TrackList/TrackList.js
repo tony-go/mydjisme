@@ -9,16 +9,14 @@ class TrackList extends React.Component {
   }
 
   render() {
-    console.log(this.props.tracks[0])
     return (
       <div className="TrackList">
         {
-          // this.props.tracks[0].name
-          // this.props.tracks.map(
-          // function(track) {
-          //   return <Track track={track} />
-          //   }
-          // )
+          this.props.tracks.map(
+          function(track) {
+            return <Track track={track} />
+            }
+          )
         }
       </div>
     )
