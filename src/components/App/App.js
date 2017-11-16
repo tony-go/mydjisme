@@ -14,8 +14,22 @@ class App extends Component {
         artist : 'Gilbert M',
         album : 'Nevermind'
       }],
-      playlistResults : [] 
+      playlistName : '',
+      playlistTracks : [
+        { name : 'Hiver prochain' ,
+         artist : 'Skwere' ,
+         album : '119' }
+      ] 
     }
+
+    this.addTrack = this.addTrack.bind(this);
+  }
+
+  addTrack(track) {
+    console.log('yoyooy')
+    // if (!this.state.playlistTracks.track.id) {
+    //     this.setState({playlistTracks : track});
+    // }
   }
 
   render() {
@@ -25,8 +39,8 @@ class App extends Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} />
-            <Playlist playlistResults={this.state.playlistResults} />
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}/>
           </div>
         </div>
       </div>

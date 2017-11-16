@@ -4,9 +4,6 @@ import './TrackList.css'
 import Track from '../Track/Track'
 
 class TrackList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -14,7 +11,9 @@ class TrackList extends React.Component {
         {
           this.props.tracks.map(
           function(track) {
-            return <Track track={track} />
+            return <Track track={track} 
+                          key={track.id} 
+                          onAdd={this.props.onAdd} />
             }
           )
         }
