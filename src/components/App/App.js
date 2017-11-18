@@ -14,22 +14,32 @@ class App extends Component {
         artist : 'Gilbert M',
         album : 'Nevermind'
       }],
-      playlistName : '',
+      playlistName : 'My Playlist',
       playlistTracks : [
         { name : 'Hiver prochain' ,
          artist : 'Skwere' ,
          album : '119' }
       ] 
-    }
+    };
 
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
   }
 
   addTrack(track) {
-    console.log('yoyooy')
-    // if (!this.state.playlistTracks.track.id) {
-    //     this.setState({playlistTracks : track});
-    // }
+    let tracks = this.state.playlistTracks;
+    if (!tracks.includes(track)) {
+      tracks.push(track);
+      this.setState({playlistTracks: tracks});
+    }
+  }
+
+  // Thnik to change name by id after the Request part of the project
+  removeTrack(track) {
+    let tracks = this.state.playlistTracks.filter(currentTrack => currentTrack.name !== track.name);
+
+    this.setState({playlistTracks: tracks});
+    console.log(tracks)
   }
 
   render() {
@@ -40,7 +50,7 @@ class App extends Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}/>
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack} />
           </div>
         </div>
       </div>
