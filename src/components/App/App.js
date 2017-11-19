@@ -32,7 +32,7 @@ class App extends Component {
 
   // Thnik to change name by id after the Request part of the project
   removeTrack(track) {
-    let tracks = this.state.playlistTracks.filter(currentTrack => currentTrack.name !== track.name);
+    let tracks = this.state.playlistTracks.filter(currentTrack => currentTrack.id !== track.id);
     this.setState({playlistTracks: tracks})
     console.log(tracks)
   }
@@ -45,12 +45,12 @@ class App extends Component {
   savePlaylist() {
     let trackURIs = this.state.playlistTracks.map(track => track.uri)
     console.log(trackURIs)
-    Spotify.savePlaylist(this.state.playlistName, trackURIs).then(
-     this.setState({
-      playlistName: 'New Playlist',
-      playlistTracks: []
-     })
-    )
+    Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
+      this.setState({
+        playlistName: 'New Playlist',
+        playlistTracks: []
+      });
+    });
     }
 
   search(searchTerm) {
