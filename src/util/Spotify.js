@@ -1,8 +1,7 @@
 let token; 
 
 const clientId = 'f45c43ff5f6a45e5806c625cf3e1b193'; // Put you own clientId Here ! 
-//const clientSecret = '5695ae5768694160a8ab8e71d7ef3a74';
-const redirectUri ='http://localhost:3000'; // Don't forget to declare your redirect URL in the Spotify App
+const redirectUri ='http://localhost:3000/'; // Don't forget to declare your redirect URL in the Spotify App
 
 
 class Spotify {
@@ -21,17 +20,49 @@ class Spotify {
 
 			window.setTimeout(() => token = '', expiresIn * 1000); // Token expiration limit
 			window.history.pushState('Access Token', null, '/'); // Clear the parameter from url 
-			console.log
+			console.log(token)
 			return token;
 		} else {
 			const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
 			window.location = accessUrl;
 		}
 	}
+
+	search(searchTerm) {
+		const token = Spotify.getAccessToken();
+
+		return fetch (`https://api.spotify.com/v1/search?type=TRACK&q=${searchTerm}`,
+			{ headers : 
+			{ 
+				Authorization: `Bearer ${token}`
+			}
+		}
+		)
+		.then(
+			console.log(searchTerm)
+		)
+		.then(
+			response => {return response.json()}
+		)
+		.then(
+			json => {
+				if (!json.tracks) {
+					return []; 
+				}
+				return json.tracks.items.map(
+					track => { return ({
+						id : track.id,
+						name : track.name,
+						artist : track.artist[0].name,
+						album : track.album.name,
+						URI : track.uri
+					})}
+				)
+				
+			}
+		)
+	}
 }
 
-let test = new Spotify; 
 
-
-test.getAccessToken();
-export default Spotify;
+export default Spotify

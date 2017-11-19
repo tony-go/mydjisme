@@ -10,25 +10,16 @@ class App extends Component {
     super(props);
 
     this.state = { 
-      searchResults : [{
-        name : 'Viens danser',
-        artist : 'Gilbert M',
-        album : 'Nevermind'
-      }],
+      searchResults : [],
       playlistName : 'My Playlist',
-      playlistTracks : [
-        { name : 'Hiver prochain' ,
-          artist : 'Skwere' ,
-          album : '119',
-          uri : '33' }
-      ] 
+      playlistTracks : [] 
     };
 
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
-    this.search = this.search.bind(this); 
+    //this.search = this.search.bind(this); 
   }
 
   addTrack(track) {
@@ -62,8 +53,12 @@ class App extends Component {
     )
   }
 
-  search(searcheTerm) {
-    console.log(searcheTerm)
+  search(searchTerm) {
+    Spotify.search(searchTerm)
+    .then( result => {
+      this.setState( {searchResults : result} )
+    }
+    )
   }
 
   render() {
