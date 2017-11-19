@@ -52,7 +52,7 @@ const Spotify = {
 						name : track.name,
 						artist : track.artists[0].name,
 						album : track.album.name,
-						URI : track.uri
+						uri : track.uri
 					})
 				)
 				
@@ -64,20 +64,21 @@ const Spotify = {
 		if (!playlistName || !trackURIs) {
 			return;
 		}
-
+		//console.log(playlistName + trackURIs)
 		const token = Spotify.getAccessToken();
 		const headers = { Authorization: `Bearer ${token}` };
-		let userID; 
+		let userId;
+		let playlistId;
 
-		return fetch('https://api.spotify.com/v1/me', {
+		return fetch(`https://api.spotify.com/v1/me`, {
 			headers : headers
 		})
 		.then(response => {
 			response.json()
 		})
-		.then(json => {
-			userID = json.id;
-			return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+		.then(jsonResponse => {
+			userId = jsonResponse.id;
+			return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
 				headers : headers,
 				method : 'POST', 
 				body : JSON.stringify( {name : playlistName} )
@@ -85,17 +86,19 @@ const Spotify = {
 			.then(response => {
 				response.json();
 			})
-			.then(json => {
-				let playlistID = json.id;
-				return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+			.then(jsonResponse => {
+				playlistId = jsonResponse.id;
+				return fetch(`https://api.spotify.com/v1/users/{userId}/playlists/${playlistId}/tracks`, {
 					headers : headers, 
 					method : 'POST',
-					body: JSON.stringify({uris: trackURIs})
+					body: JSON.stringify( {uris: trackURIs} )
 				})
 			})
 
 		})
 	}
+
+
 }
 export default Spotify
 

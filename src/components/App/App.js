@@ -43,15 +43,15 @@ class App extends Component {
 
   // In a later step, you will pass the trackURIs array and playlistName to a method that will save the user's playlist to their account.
   savePlaylist() {
-    let trackURIs = []; 
-    this.state.playlistTracks.map(
-      track => {
-        trackURIs.push(track.uri)
-        Spotify.savePlaylist(this.state.playlistName, trackURIs)
-        //return (trackURIs)
-      }
+    let trackURIs = this.state.playlistTracks.map(track => track.uri)
+    console.log(trackURIs)
+    Spotify.savePlaylist(this.state.playlistName, trackURIs).then(
+     this.setState({
+      playlistName: 'New Playlist',
+      playlistTracks: []
+     })
     )
-  }
+    }
 
   search(searchTerm) {
     Spotify.search(searchTerm)
