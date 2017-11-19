@@ -14,7 +14,9 @@ class SearchBar extends React.Component {
   }
 
   handleSearch(event) {
+  
    this.setState({ searchTerm : event.target.value })
+   console.log(this.state.searchTerm)
   }
   
   search() {

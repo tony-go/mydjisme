@@ -4,7 +4,7 @@ const clientId = 'f45c43ff5f6a45e5806c625cf3e1b193'; // Put you own clientId Her
 const redirectUri ='http://localhost:3000/'; // Don't forget to declare your redirect URL in the Spotify App
 
 
-class Spotify {
+const Spotify = {
 	
 	getAccessToken() {
 		if (token) {
@@ -26,7 +26,7 @@ class Spotify {
 			const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
 			window.location = accessUrl;
 		}
-	}
+	},
 
 	search(searchTerm) {
 		const token = Spotify.getAccessToken();
@@ -39,9 +39,6 @@ class Spotify {
 		}
 		)
 		.then(
-			console.log(searchTerm)
-		)
-		.then(
 			response => {return response.json()}
 		)
 		.then(
@@ -50,19 +47,19 @@ class Spotify {
 					return []; 
 				}
 				return json.tracks.items.map(
-					track => { return ({
+					track =>  ({
 						id : track.id,
 						name : track.name,
-						artist : track.artist[0].name,
+						artist : track.artists[0].name,
 						album : track.album.name,
 						URI : track.uri
-					})}
+					})
 				)
 				
 			}
 		)
 	}
 }
-
-
 export default Spotify
+
+ 

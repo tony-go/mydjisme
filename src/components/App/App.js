@@ -19,7 +19,7 @@ class App extends Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
-    //this.search = this.search.bind(this); 
+    this.search = this.search.bind(this); 
   }
 
   addTrack(track) {
@@ -47,7 +47,6 @@ class App extends Component {
     this.state.playlistTracks.map(
       track => {
         trackURIs.push(track.uri)
-        console.log(trackURIs)
         return (trackURIs)
       }
     )
@@ -55,8 +54,8 @@ class App extends Component {
 
   search(searchTerm) {
     Spotify.search(searchTerm)
-    .then( result => {
-      this.setState( {searchResults : result} )
+    .then( searchResults => {
+      this.setState( {searchResults : searchResults} )
     }
     )
   }
