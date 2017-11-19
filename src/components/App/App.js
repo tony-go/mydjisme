@@ -47,7 +47,8 @@ class App extends Component {
     this.state.playlistTracks.map(
       track => {
         trackURIs.push(track.uri)
-        return (trackURIs)
+        Spotify.savePlaylist(this.state.playlistName, trackURIs)
+        //return (trackURIs)
       }
     )
   }
