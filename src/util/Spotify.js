@@ -31,7 +31,7 @@ const Spotify = {
 	search(searchTerm) {
 		const token = Spotify.getAccessToken();
 
-		return fetch (`https://api.spotify.com/v1/search?type=TRACK&q=${searchTerm}`,
+		return fetch (`https://api.spotify.com/v1/search?type=TRACK&q=${searchTerm}&market=FR`,
 			{ headers : 
 			{ 
 				Authorization: `Bearer ${token}`
@@ -52,7 +52,8 @@ const Spotify = {
 						name : track.name,
 						artist : track.artists[0].name,
 						album : track.album.name,
-						uri : track.uri
+						uri : track.uri,
+						preview : track.preview_url
 					})
 				)
 				
