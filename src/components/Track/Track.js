@@ -2,16 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Track.css'
 
-function AudioPreview(props) {
-  return (
-    <audio src={props.previewURL} autoPlay>
-      Preview
-    </audio>
-  )
-}
+// function AudioPreview(props) {
+//   return (
+//     <audio src={props.previewURL} autoPlay>
+//       Preview
+//     </audio>
+//   )
+// }
 
 class Track extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -22,7 +21,7 @@ class Track extends React.Component {
 
     this.addTrack = this.addTrack.bind(this);
     this.addRemove = this.addRemove.bind(this);
-    this.playPreview = this.playPreview.bind(this);
+    //this.playPreview = this.playPreview.bind(this);
   }
 
   renderAction() {
@@ -41,9 +40,9 @@ class Track extends React.Component {
     this.props.onRemove(this.props.track)
   }
 
-  playPreview(event) {
-    this.setState({playing : true})
-  }
+  // playPreview(event) {
+  //   this.setState({playing : true})
+  // }
   
 
   render() {
@@ -53,12 +52,12 @@ class Track extends React.Component {
           <h3>{this.props.track.name}</h3>
           <p>{this.props.track.artist} | {this.props.track.album} 
             {this.props.track.preview &&
-              ( <a onClick={this.playPreview}  > + Preview</a> )
+              ( <a onClick={this.props.onPlay}  > + Preview</a> )
             }
           </p>
         </div>
         {this.renderAction()}
-        {this.state.playing && <AudioPreview previewURL={this.props.track.preview}/>  }
+        {/* {this.state.playing && <AudioPreview previewURL={this.props.track.preview}/>  } */}
       </div>
     )
   }
