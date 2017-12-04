@@ -16,14 +16,18 @@ class TrackList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing : false
+      playing : false,
+      previewURL : ''
     }
 
     this.playPreview = this.playPreview.bind(this);
   }
 
-  playPreview() {
-    this.setState({playing : true})
+  playPreview(previewURL) {
+    this.setState({
+      playing : true,
+      previewURL : previewURL
+    })
   }
 
 
@@ -31,8 +35,7 @@ class TrackList extends React.Component {
     return (
       <div className="TrackList">
         {
-          this.props.tracks.map(
-          track =>  {
+          this.props.tracks.map(track =>  {
             return  <Track track={track} 
                           key={track.id} 
                           onAdd={this.props.onAdd} 
@@ -42,7 +45,7 @@ class TrackList extends React.Component {
             }
           )
         }
-        {this.state.playing && <AudioPreview previewURL={this.tracks.track.preview}/> }
+        {this.state.playing && <AudioPreview previewURL={this.state.previewURL}/> }
       </div>
     )
   }
